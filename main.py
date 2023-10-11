@@ -32,17 +32,21 @@ class Employee:
         print("4|Salary: ",self.salary)
         print("5|Age: ",self.age)
         print("6|Gender: ",self.gender)
-        print("7|Address: ",self.address)
-        print("8|City: ",self.city)
-        print("9|DOB: ",self.dob)
-        print("10|DOJ: ",self.doj)
-        print("11|Department Name: ",self.department_name)
-        print("12|Designation: ",self.designation)
-        print("13|PAN Card Number: ",self.pan_card_number)
-        print("14|Aadhar Number: ",self.aadhar_number)
+        print("7|Nationality: ",self.nationality)
+        print("8|Address: ",self.address)
+        print("9|City: ",self.city)
+        print("10|DOB: ",self.dob)
+        print("11|DOJ: ",self.doj)
+        print("12|Department Name: ",self.department_name)
+        print("13|Designation: ",self.designation)
+        print("14|PAN Card Number: ",self.pan_card_number)
+        print("15|Aadhar Number: ",self.aadhar_number)
         print("16|Contact Number: ",self.phone)
         print("17|Email ID is: ",self.email)
         print("18|Nationality: ",self.nationality)
+
+    def get_salary(emp):
+        return emp.salary
 
     @classmethod
     def departmentDetails(self):
@@ -61,7 +65,8 @@ while True:
     print("5 to Delete Employee Record")
     print("6 for Updating Employee Record")
     print("7 to Get Maximum Salary")
-    print("8 to Exit")
+    print("8 to Get Minimum Salary")
+    print("9 to Exit")
     
     ch=int(input("Enter your choice: "))
     if ch==1:
@@ -98,6 +103,12 @@ while True:
         while True:
             gender=input("Enter gender: ")
             if validate_gender(gender):
+                break
+            else:
+                print("Incorrect entry!")
+        while True:
+            nationality=input("Enter Nationality: ")
+            if validate_nationality(nationality):
                 break
             else:
                 print("Incorrect entry!")
@@ -149,8 +160,20 @@ while True:
                 break
             else:
                 print("Incorrect entry")
+        while True:
+            phone=input("Enter the contact number: ")
+            if validate_phone(phone):
+                break
+            else:
+                print("Wrong Number!")
+        while True:
+            email=input("Enter the email id: ")
+            if validate_email(email):
+                break
+            else:
+                print("Email doesn't exist!")
 
-        obj=Employee(employee_id, employee_name,marriage,salary,age,gender,address,city,dob,doj,department_name,designation,pan_card_number,aadhar_number)
+        obj=Employee(employee_id, employee_name,marriage,salary,age,gender,address,city,dob,doj,department_name,designation,pan_card_number,aadhar_number,nationality,phone,email)
 
         employee_list.append(obj)
     
@@ -162,7 +185,8 @@ while True:
         while True:
             print("Press A: To search the Employee by Employee ID")
             print("Press B: To search the Employee by their name")
-            print("Press C: To exit the searching window.")
+            print("Press C: To search the Employee by their department")
+            print("Press D: To exit the searching window.")
             ch1=input("Enter the choice: ")
             if ch1=='A':
                 a=input("Enter the Employee ID: ")
@@ -175,6 +199,11 @@ while True:
                     if i.employee_name==a:
                         i.display_details()
             elif ch1=='C':
+                a=input("Enter the name of the department to search the employee: ")
+                for i in employee_list:
+                    if i.department_name==a:
+                        i.display_details()
+            elif ch1=='D':
                 break
     elif ch==4:
         Employee.departmentDetails()
@@ -269,21 +298,15 @@ while True:
                 break
                     
     elif ch==7:
-        salary_list=[]
-        for i in employee_list:
-            salary_list.append(i.salary)
-
-            if len(salary_list)==0:
-                print("!! Employee list is empty !!")
-                print(" ")
-            else:
-                max_salary=max(salary_list)
-                print("Employee with maximum salary: ")
-                for i in employee_list:
-                    if i.salary==max_salary:
-                        i.display_details()
-
+        max_salary=max(employee_list, key=Employee.get_salary)
+        print("Employee having the highest salary: ")
+        max_salary.display_details()
     elif ch==8:
+        min_salary=min(employee_list, key=Employee.get_salary)
+        print("Employee having the lowest salary: ")
+        min_salary.display_details()
+
+    elif ch==9:
         print("Exit the Employee Management System")
         break
     else:
