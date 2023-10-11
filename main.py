@@ -1,7 +1,7 @@
 from validate import *
 class Employee:
     empRecords={}
-    def __init__(self, employee_id, employee_name, salary, age, gender, address, city, dob, doj, department_name, designation, pan_card_number, aadhar_number,marriage):
+    def __init__(self, employee_id, employee_name, salary, age, gender, address, city, dob, doj, department_name, designation, pan_card_number, aadhar_number,marriage,nationality,phone,email):
         self.employee_id=employee_id
         self.employee_name=employee_name
         self.salary=salary
@@ -16,6 +16,9 @@ class Employee:
         self.pan_card_number=pan_card_number
         self.aadhar_number=aadhar_number
         self.marriage=marriage
+        self.nationality=nationality
+        self.phone=phone
+        self.email=email
         if self.department_name in self.empRecords.keys():
             self.empRecords[self.department_name].append(self.employee_name)
         else:
@@ -37,6 +40,9 @@ class Employee:
         print("12|Designation: ",self.designation)
         print("13|PAN Card Number: ",self.pan_card_number)
         print("14|Aadhar Number: ",self.aadhar_number)
+        print("16|Contact Number: ",self.phone)
+        print("17|Email ID is: ",self.email)
+        print("18|Nationality: ",self.nationality)
 
     @classmethod
     def departmentDetails(self):
