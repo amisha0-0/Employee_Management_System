@@ -63,11 +63,29 @@ def validate_pan(pan_card_number):
             return False
     return True
 
+def validate_phone(phone):
+    if len(phone)!=10:
+        return False
+    if not phone.isdigit():
+        return False
+    return True
+
+def validate_email(email):
+    if "@" not in email or "." not in email:
+        return False
+    if email.index("@")>email.index("."):
+        return False
+    if email.index("@")==0 or email.index("@")==len(email)-1:
+        return False
+    if email.index(".")==len(email)-1:
+        return False
+    return True
+
 def validate_aadhar(aadhar_number):
     if len(aadhar_number)!=12:
         return False
     if not aadhar_number.isdigit():
-            return False
+        return False
     return True
 
 def validate_department(department_name):
@@ -92,6 +110,13 @@ def validate_city(city):
         return True
     else:
         print("Validation Error: Please enter a valid city.")
+
+def validate_nationality(nationality):
+    valid_nation=['INDIAN','INDIA']
+    if nationality.upper() in valid_nation:
+        return True
+    else:
+        print("Only Indian Employees are eligible.")
 
 def validate_dob(dob):
     l=dob.split("/")
